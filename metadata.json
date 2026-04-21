@@ -1,46 +1,90 @@
 {
-  "name": "derdanne-nfs",
-  "version": "2.1.8",
-  "source": "https://github.com/derdanne/puppet-nfs.git",
-  "author": "derdanne",
+  "name": "puppet-nfs",
+  "version": "4.0.2-rc0",
+  "source": "https://github.com/voxpupuli/puppet-nfs.git",
+  "author": "Voxpupuli Community",
   "license": "Apache-2.0",
   "summary": "Installs and configures NFS server and clients",
-  "project_page": "https://github.com/derdanne/puppet-nfs",
-  "issues_url": "https://github.com/derdanne/puppet-nfs/issues",
+  "project_page": "https://github.com/voxpupuli/puppet-nfs",
+  "issues_url": "https://github.com/voxpupuli/puppet-nfs/issues",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 4.5.0 < 9.0.0"},
-    {"name":"puppetlabs/concat","version_requirement":">= 1.1.2 < 8.0.0"},
-    {"name":"puppetlabs/transition","version_requirement":">= 0.1.0 < 2.0.0"},
-    {"name":"herculesteam/augeasproviders_core","version_requirement":">= 2.1.5 < 4.0.0"},
-    {"name":"herculesteam/augeasproviders_shellvar","version_requirement":">= 1.2.0 < 5.0.0"}
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.5.0 < 10.0.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 1.1.2 < 10.0.0"
+    },
+    {
+      "name": "puppet/augeasproviders_core",
+      "version_requirement": ">= 2.1.5 < 5.0.0"
+    },
+    {
+      "name": "puppet/augeasproviders_shellvar",
+      "version_requirement": ">= 1.2.0 <= 7.0.0"
+    }
   ],
-  "tags": ["nfs", "nfs4", "exports", "mount", "mfc"],
+  "tags": [
+    "nfs",
+    "nfs4",
+    "exports",
+    "mount",
+    "mfc"
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "14.04",
-        "16.04",
-        "18.04",
-        "20.04"
+        "22.04",
+        "24.04"
       ]
     },
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11"
+        "11",
+        "12",
+        "13"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7",
-        "8"
+        "8",
+        "9",
+        "10"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "9",
+        "10"
+      ]
+    },
+    {
+      "operatingsystem": "AlmaLinux",
+      "operatingsystemrelease": [
+        "8",
+        "9",
+        "10"
+      ]
+    },
+    {
+      "operatingsystem": "Rocky",
+      "operatingsystemrelease": [
+        "8",
+        "9",
+        "10"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "8",
+        "9",
+        "10"
       ]
     },
     {
@@ -52,26 +96,20 @@
     {
       "operatingsystem": "SLES",
       "operatingsystemrelease": [
-        "12"
+        "15"
       ]
     },
     {
       "operatingsystem": "openSUSE",
       "operatingsystemrelease": [
-        "13"
-      ]
-    },
-    {
-      "operatingsystem": "Archlinux",
-      "operatingsystemrelease": [
-        "1.0"
+        "15"
       ]
     }
   ],
   "requirements": [
     {
-      "name": "puppet",
-      "version_requirement": ">= 4.0.0 < 8.0.0"
+      "name": "openvox",
+      "version_requirement": ">= 8.19.0 < 9.0.0"
     }
   ]
 }

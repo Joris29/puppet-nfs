@@ -1,61 +1,54 @@
-# == Function: nfs::functions::create_export
+# @summary Manage export creation.
 #
-# This Function exists to
-#  1. manage export creation
+# @param clients
+#   Sets the clients allowed to mount the export with options.
 #
-# === Parameters
+# @param ensure
+#   Sets if enabled or not.
 #
-# [*clients*]
-#   String or Array. Sets the clients allowed to mount the export with options.
+# @param owner
+#   Sets the owner of the exported directory.
 #
-# [*ensure*]
-#   String. Sets if enabled or not.
+# @param group
+#   Sets the group of the exported directory.
 #
-# [*owner*]
-#   String. Sets the owner of the exported directory.
+# @param mode
+#   Sets the permissions of the exported directory.
 #
-# [*group*]
-#   String. Sets the group of the exported directory.
+# @param manage_directory
+#   Whether or not to manage the directory to be exported.
 #
-# [*mode*]
-#   String. Sets the permissions of the exported directory.
+# @author
+#   * Daniel Klockenkaemper <dk@marketing-factory.de>
+#   * Martin Alfke <tuxmea@gmail.com>
 #
-# === Examples
-#
-# This Function should not be called directly.
-#
-# === Links
-#
-# * {Puppet Docs: Using Parameterized Classes}[http://j.mp/nVpyWY]
-#
-#
-# === Authors
-#
-# * Daniel Klockenkaemper <mailto:dk@marketing-factory.de>
-#
-
 define nfs::functions::create_export (
-  $clients,
-  $ensure = 'present',
-  $owner  = undef,
-  $group  = undef,
-  $mode   = undef,
+  Variant[String[1], Array[String[1]]] $clients,
+  String[1]                            $ensure = 'present',
+  Boolean                              $manage_directory = true,
+  Optional[String[1]]                  $owner  = undef,
+  Optional[String[1]]                  $group  = undef,
+  Optional[String[1]]                  $mode   = undef,
 ) {
   if $ensure != 'absent' {
     $line = "${name} ${join(any2array($clients),' ')}\n"
 
     concat::fragment { $name:
-      target  => $::nfs::exports_file,
+      target  => $nfs::exports_file,
       content => $line,
     }
 
+    # Create the directory path only if a File resource isn't
+    # defined previously AND the $manage_directory boolean is true.
     unless defined(File[$name]) {
-      file { $name:
-        ensure                  => directory,
-        owner                   => $owner,
-        group                   => $group,
-        mode                    => $mode,
-        selinux_ignore_defaults => true,
+      if $manage_directory {
+        file { $name:
+          ensure                  => directory,
+          owner                   => $owner,
+          group                   => $group,
+          mode                    => $mode,
+          selinux_ignore_defaults => true,
+        }
       }
     }
   }
